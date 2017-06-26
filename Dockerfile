@@ -2,7 +2,6 @@ FROM mhart/alpine-node:7.6.0
 
 WORKDIR /src
 
-RUN mkdir /src
 COPY app/src/package.json /src/package.json
 
 #install node modules
