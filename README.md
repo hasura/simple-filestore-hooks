@@ -1,8 +1,8 @@
 `simple-filestore-hooks` is a repo that has a simple filestore authorization
 webhook for Hasura that sets up the following authorizations:
 
-1) Create: Any logged in user
-2) Delete: Not allowed
+1) Create: Any logged in user can upload a file
+2) Delete: Not allowed (except for admin users)
 3) Read: Any user (including anonymous)
 
 # Usage with Hasura
@@ -18,5 +18,4 @@ webhook for Hasura that sets up the following authorizations:
 
 1. On the console head to Filestore > Manage permissions (`/filestore/permissions`)
 2. Add this authorization hook: `http://filestore-check.default/public-read`
-
 
