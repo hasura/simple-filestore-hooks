@@ -17,11 +17,12 @@ app.get('/public-read', function (req, res) {
   const fileOp = req.query.file_op;
 
   const roles = req.get('x-hasura-allowed-roles');
-  let isUser = true;
+  var isUser = true;
   if (!roles || !roles.length) {
     isUser = false;
+  } else {
+    isUser = (roles.indexOf('user') >= 0);
   }
-  isUser = (roles.indexOf('user') >= 0);
 
   const isWriteOp = (['create', 'delete'].indexOf(fileOp) >= 0);
 
