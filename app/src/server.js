@@ -29,7 +29,7 @@ app.get('/public-read', function (req, res) {
       res.send(JSON.stringify({message: 'allow'}));
     }
   } else {
-    res.status(400).sent(JSON.stringify({message: 'Missing query params file_id and/or file_op'}));
+    res.status(400).send(JSON.stringify({message: 'Missing query params file_id and/or file_op'}));
   }
 });
 
