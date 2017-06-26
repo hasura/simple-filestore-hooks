@@ -1,38 +1,22 @@
-# Quickstart - Build your own Docker image#
+`simple-filestore-hooks` is a repo that has a simple filestore authorization
+webhook for Hasura that sets up the following authorizations:
 
-Build the Docker image using the following command
+1) Create: Any logged in user
+2) Delete: Not allowed
+3) Read: Any user (including anonymous)
 
-```bash
-$ docker build -t nodejs-express:<tag> .
-```
+# Usage with Hasura
 
-Run the Docker container using the command below.
+#### Add this as a git push microservice on Hasura
+1. Add a `git-push` service via the Hasura console, named `filestore-check`
+2. Run: `git clone https://github.com/hasura/simple-filestore-hooks.git`
+2. `cd simple-filestore-hooks`
+3. Get the hasura remote URL from the hasura console: `git remote hasura add <your-hasura-git-remote-url` 
+4. Run: `git push hasura master`
 
-```bash
-$ docker run -d -p 8080:8080 nodejs-express:<tag>
-```
+#### Use the authorization hook in the filestore
 
-# Quickstart - git based pipeline
+1. On the console head to Filestore > Manage permissions (`/filestore/permissions`)
+2. Add this authorization hook: `http://filestore-check.default/public-read`
 
-Follow the steps mentioned below for git based pipeline
 
-1. Ensure that you have a git project
-2. Edit `app/src/server.js`
-3. Commit your changes
-
-    ```bash
-    $ git add .
-    $ git commit -m "message"
-    ```
-
-4. Push the changes to git
-
-    ```bash
-    $ git push <remote> master
-    ```
-
-# Advanced usage
-
-### **Port**
-
-Default Port for application is `8080` .

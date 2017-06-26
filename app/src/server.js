@@ -27,12 +27,14 @@ app.get('/public-read', function (req, res) {
   const isWriteOp = (['create', 'delete'].indexOf(fileOp) >= 0);
 
   if (fileId && fileOp) {
-    if (isWriteOp) {
+    if (fileOp === 'create') {
       if (isUser) {
         res.send(JSON.stringify({message: 'allow'}));
       } else {
         res.status(403).send(JSON.stringify({message: 'deny'}));
       }
+    } else if (fileOp === 'delete') {
+      res.status(403).send(JSON.stringify({message: 'deny'}));
     } else {
       res.send(JSON.stringify({message: 'allow'}));
     }
