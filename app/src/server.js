@@ -15,9 +15,16 @@ app.use(morgan('dev'));
 app.get('/public-read', function (req, res) {
   const fileId = req.query.file_id;
   const fileOp = req.query.file_op;
+
   const roles = req.get('x-hasura-allowed-roles');
-  const isUser = (roles.indexOf('user') >= 0);
+  let isUser = true;
+  if (!roles || !roles.length) {
+    isUser = false;
+  }
+  isUser = (roles.indexOf('user') >= 0);
+
   const isWriteOp = (['create', 'delete'].indexOf(fileOp) >= 0);
+
   if (fileId && fileOp) {
     if (isWriteOp) {
       if (isUser) {
