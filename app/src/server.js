@@ -18,14 +18,18 @@ app.get('/public-read', function (req, res) {
   const roles = req.get('x-hasura-allowed-roles');
   const isUser = (roles.indexOf('user') >= 0);
   const isWriteOp = (['create', 'delete'].indexOf(fileOp) >= 0);
-  if (isWriteOp) {
-    if (isUser) {
-      res.send(JSON.stringify({message: 'allow'}));
+  if (fileId && fileOp) {
+    if (isWriteOp) {
+      if (isUser) {
+        res.send(JSON.stringify({message: 'allow'}));
+      } else {
+        res.status(403).send(JSON.stringify({message: 'deny'}));
+      }
     } else {
-      res.status(403).send(JSON.stringify({message: 'deny'}));
+      res.send(JSON.stringify({message: 'allow'}));
     }
   } else {
-    res.send(JSON.stringify({message: 'allow'}));
+    res.status(400).sent(JSON.stringify({message: 'Missing query params file_id and/or file_op'}));
   }
 });
 
