@@ -11,7 +11,7 @@ webhook for Hasura that sets up the following authorizations:
 1. Add a `git-push` service via the Hasura console, named `filestore-check`
 2. Run: `git clone https://github.com/hasura/simple-filestore-hooks.git`
 2. `cd simple-filestore-hooks`
-3. Get the hasura remote URL from the hasura console: `git remote hasura add <your-hasura-git-remote-url` 
+3. Get the hasura remote URL from the hasura console: `git remote add hasura <your-hasura-git-remote-url>` 
 4. Run: `git push hasura master`
 
 #### Use the authorization hook in the filestore
